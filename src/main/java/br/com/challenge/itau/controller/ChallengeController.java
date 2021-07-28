@@ -19,7 +19,12 @@ public class ChallengeController {
         this.challengeService = challengeService;
     }
 
-    @GetMapping(value = "/password")
+    @GetMapping(value = "/password/v1")
+    public ResponseEntity<Boolean> validateStringBoolean(@RequestBody PasswordRequestModel passwordRequestModel) {
+        return ResponseEntity.ok(challengeService.validatePasswordBoolean(passwordRequestModel.getPassword()));
+    }
+
+    @GetMapping(value = "/password/v2")
     public ResponseEntity<PasswordResponseModel> validateString(@RequestBody PasswordRequestModel passwordRequestModel) {
         return ResponseEntity.ok(challengeService.validatePassword(passwordRequestModel.getPassword()));
     }
