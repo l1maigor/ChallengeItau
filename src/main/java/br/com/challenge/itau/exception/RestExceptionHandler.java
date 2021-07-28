@@ -31,7 +31,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var message = messageSource.getMessage("regex.exception",null, LocaleContextHolder.getLocale());
         log.error(ExceptionUtils.getRootCauseMessage(invalidRegexException));
         List<Error> errors = List.of(new Error(1,message));
-          return handleExceptionInternal(invalidRegexException,errors,new HttpHeaders(), HttpStatus.BAD_GATEWAY,webRequest);
+          return handleExceptionInternal(invalidRegexException,errors,new HttpHeaders(), HttpStatus.OK,webRequest);
     }
 
     @ExceptionHandler({NullPointerException.class})
@@ -39,7 +39,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var message = messageSource.getMessage("null.pointer.exception",null, LocaleContextHolder.getLocale());
         log.error(ExceptionUtils.getRootCauseMessage(nullPointerException));
         List<Error> errors = List.of(new Error(2,message));
-        return handleExceptionInternal(nullPointerException,errors,new HttpHeaders(), HttpStatus.BAD_GATEWAY,webRequest);
+        return handleExceptionInternal(nullPointerException,errors,new HttpHeaders(), HttpStatus.OK,webRequest);
     }
 
     @ExceptionHandler({Exception.class})
@@ -47,7 +47,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         var message = messageSource.getMessage("exception",null, LocaleContextHolder.getLocale());
         log.error(ExceptionUtils.getRootCauseMessage(exception));
         List<Error> errors = List.of(new Error(3, message));
-        return handleExceptionInternal(exception,errors,new HttpHeaders(), HttpStatus.BAD_GATEWAY,webRequest);
+        return handleExceptionInternal(exception,errors,new HttpHeaders(), HttpStatus.OK,webRequest);
     }
 
     @Getter
