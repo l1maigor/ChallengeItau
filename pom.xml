@@ -51,7 +51,9 @@
         <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
         <sonar.language>java</sonar.language>
         <sonar.exclusions>
-            srv/test/java/**/*
+            srv/test/java/**/*,
+            src/main/java/br/com/challenge/itau/ChallengeItau.java,
+            src/main/java/br/com/challenge/itau/exception/RestExceptionHandler.java
         </sonar.exclusions>
     </properties>
 
