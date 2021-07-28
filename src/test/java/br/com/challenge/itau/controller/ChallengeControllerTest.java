@@ -11,8 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -28,7 +27,7 @@ class ChallengeControllerTest {
     void validateStringSuccessfully() throws Exception {
 
         var request = MockMvcRequestBuilders
-                .get("/validate/password")
+                .get("/validate/password/v2")
                 .header("Content-Type", "application/json")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -45,7 +44,7 @@ class ChallengeControllerTest {
     void validateStringFailure() throws Exception {
 
         var request = MockMvcRequestBuilders
-                .get("/validate/password")
+                .get("/validate/password/v2")
                 .header("Content-Type", "application/json")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -62,7 +61,7 @@ class ChallengeControllerTest {
     void validateStringNull() throws Exception {
 
         var request = MockMvcRequestBuilders
-                .get("/validate/password")
+                .get("/validate/password/v2")
                 .header("Content-Type", "application/json")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
@@ -73,5 +72,37 @@ class ChallengeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("code").value(2))
                 .andExpect(jsonPath("message").value("Password field cannot be null"));
+    }
+
+    @Test
+    void validateStringBooleanTrue() throws Exception {
+
+        var request = MockMvcRequestBuilders
+                .get("/validate/password/v1")
+                .header("Content-Type", "application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new PasswordRequestModel("AbTp9!fok")));
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
+    }
+
+    @Test
+    void validateStringBooleanFalse() throws Exception {
+
+        var request = MockMvcRequestBuilders
+                .get("/validate/password/v1")
+                .header("Content-Type", "application/json")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(new PasswordRequestModel("aa")));
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string("false"));
     }
 }
