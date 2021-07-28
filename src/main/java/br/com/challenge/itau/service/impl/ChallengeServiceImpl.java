@@ -12,9 +12,7 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     public PasswordResponseModel validatePassword(String password) {
 
-        var parameters = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+])(?=\\S+$).{9,}";
-
-        if(!password.matches(parameters)) {
+        if(!regex(password)) {
             throw new InvalidRegexException("Password does not have all parameters");
         }
 
@@ -24,6 +22,28 @@ public class ChallengeServiceImpl implements ChallengeService {
                 .code(0)
                 .message("Password successfully validated")
                 .build();
+    }
+
+    @Override
+    public Boolean validatePasswordBoolean(String password) {
+            if(!regex(password)) {
+                return Boolean.FALSE;
+            }
+
+            log.info("The password has all the necessary parameters");
+
+            return Boolean.TRUE;
+    }
+
+    private Boolean regex(String password){
+
+        var parameters = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+])(?=\\S+$).{9,}";
+
+        if(!password.matches(parameters)) {
+            return Boolean.FALSE;
+        } else {
+            return Boolean.TRUE;
+        }
     }
 
 }
