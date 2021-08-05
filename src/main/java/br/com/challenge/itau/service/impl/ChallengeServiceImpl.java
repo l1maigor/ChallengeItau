@@ -6,6 +6,8 @@ import br.com.challenge.itau.service.ChallengeService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Pattern;
+
 @Service
 @Log4j2
 public class ChallengeServiceImpl implements ChallengeService {
@@ -37,13 +39,35 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     private Boolean regex(String password){
 
-        var parameters = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-+])(?=\\S+$).{9,}";
+        //Visando a manutenibilidade e legibilidade do método, foi ajustado da forma a seguir
+        //Dessa forma, futuramente é possível também retornar o motivo exato da falha
 
-        if(!password.matches(parameters)) {
+        if(password.matches("(?=.*[0-9])")) {
             return Boolean.FALSE;
-        } else {
+        }
+        if(password.matches("(?=.*[a-z])")) {
+            return Boolean.FALSE;
+        }
+        if(password.matches("(?=.*[A-Z])")) {
+            return Boolean.FALSE;
+        }
+        if(password.matches("(?=.*[!@#$%^&*()-+])")) {
+            return Boolean.FALSE;
+        }
+        if(password.matches("(?=\\S+$)")) {
+            return Boolean.FALSE;
+        }
+        if(password.matches("(.)(?=.*\\1)")) {
+            return Boolean.FALSE;
+        }
+        if(Pattern.compile("(.)(?=.*\\1)", Pattern.MULTILINE).matcher(password).find()) {
+            return Boolean.FALSE;
+        }
+        if(!password.matches(".{9,}")) {
+            return Boolean.FALSE;
+        }
+        else {
             return Boolean.TRUE;
         }
     }
-
 }
