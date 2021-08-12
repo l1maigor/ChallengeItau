@@ -28,13 +28,18 @@ public class ChallengeServiceImpl implements ChallengeService {
 
     @Override
     public Boolean validatePasswordBoolean(String password) {
-            if(!regex(password)) {
-                return Boolean.FALSE;
-            }
 
-            log.info("The password has all the necessary parameters");
+        if(password == null || password.isEmpty()) {
+            return Boolean.FALSE;
+        }
 
-            return Boolean.TRUE;
+        if(!regex(password)) {
+            return Boolean.FALSE;
+        }
+
+        log.info("The password has all the necessary parameters");
+
+        return Boolean.TRUE;
     }
 
     private Boolean regex(String password){
