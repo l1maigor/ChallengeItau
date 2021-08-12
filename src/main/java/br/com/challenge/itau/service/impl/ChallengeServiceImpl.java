@@ -42,28 +42,32 @@ public class ChallengeServiceImpl implements ChallengeService {
         //Visando a manutenibilidade e legibilidade do método, foi ajustado da forma a seguir
         //Dessa forma, futuramente é possível também retornar o motivo exato da falha
 
-        if(password.matches("(?=.*[0-9])")) {
+        if(!Pattern.compile("(?=.*[0-9])", Pattern.MULTILINE).matcher(password).find()) {
+            log.warn("Password has no numeric characters");
             return Boolean.FALSE;
         }
-        if(password.matches("(?=.*[a-z])")) {
+        if(!Pattern.compile("(?=.*[a-z])", Pattern.MULTILINE).matcher(password).find()) {
+            log.warn("Password does not contain lowercase characters");
             return Boolean.FALSE;
         }
-        if(password.matches("(?=.*[A-Z])")) {
+        if(!Pattern.compile("(?=.*[A-Z])", Pattern.MULTILINE).matcher(password).find()) {
+            log.warn("Password does not contain uppercase characters");
             return Boolean.FALSE;
         }
-        if(password.matches("(?=.*[!@#$%^&*()-+])")) {
+        if(!Pattern.compile("(?=.*[!@#$%^&*()-+])", Pattern.MULTILINE).matcher(password).find()) {
+            log.warn("Password does not contain special characters");
             return Boolean.FALSE;
         }
-        if(password.matches("(?=\\S+$)")) {
-            return Boolean.FALSE;
-        }
-        if(password.matches("(.)(?=.*\\1)")) {
+        if(!Pattern.compile("(?=\\S+$)", Pattern.MULTILINE).matcher(password).find()) {
+            log.warn("Password contains blank characters");
             return Boolean.FALSE;
         }
         if(Pattern.compile("(.)(?=.*\\1)", Pattern.MULTILINE).matcher(password).find()) {
+            log.warn("Password contains duplicate characters");
             return Boolean.FALSE;
         }
         if(!password.matches(".{9,}")) {
+            log.warn("Password must contain nine or more characters.");
             return Boolean.FALSE;
         }
         else {
