@@ -45,7 +45,7 @@ PROJECT_HOME:\target\java -jar .\ChallengeItau-0.0.1-SNAPSHOT.jar
 
 Após realizados os passos, é esperado o seguinte log:
 
-![img_6.png](img_6.png)
+![img_6.png](src/main/resources/img/img_6.png)
 
 ## ⚙️ Executando os testes
 
@@ -62,10 +62,10 @@ Existem duas soluções para o desafio proposto:
   
 
 <b>Condição true</b>
-![img_1.png](img_1.png)
+![img_1.png](src/main/resources/img/img_1.png)
 
 <b>Condição false</b>
-![img_2.png](img_2.png)
+![img_2.png](src/main/resources/img/img_2.png)
 
 2 - Versão 2 (V2):
 
@@ -77,13 +77,13 @@ Existem duas soluções para o desafio proposto:
       * 3 - Exceção não esperada/tratada.
 
 <b>Code 0</b>
-![img_3.png](img_3.png)
+![img_3.png](src/main/resources/img/img_3.png)
 
 <b>Code 1</b>
-![img_4.png](img_4.png)
+![img_4.png](src/main/resources/img/img_4.png)
 
 <b>Code 2</b>
-![img_5.png](img_5.png)
+![img_5.png](src/main/resources/img/img_5.png)
 
 ## 📦 Desenvolvimento
 
