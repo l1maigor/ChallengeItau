@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "094e745a-cc31-4d15-ab10-9482aaa2bd8d",
+		"name": "ItauChallenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validate Password V1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"AbTp9!foAA\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/validate/password/v1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"validate",
+						"password",
+						"v1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validate Password V2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"password\": \"ab\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/validate/password/v2",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"validate",
+						"password",
+						"v2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
