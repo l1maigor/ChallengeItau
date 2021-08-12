@@ -69,8 +69,8 @@ Existem duas soluções para o desafio proposto:
 
 2 - Versão 2 (V2):
 
-  *Retorna um json com código e mensagem amigável, sendo:
-    *code - código de procesamento:
+  * Retorna um json com código e mensagem amigável, sendo:
+    * code - código de procesamento:
       * 0 - Senha validada com sucesso;
       * 1 - Alguma condição dos parâmetros não foi atendida;
       * 2 - O campo senha não foi enviado (nulo);
